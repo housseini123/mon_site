@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    <!-- ÉCRAN DE VERROUILLAGE AVEC TEXTE ACCÈS -->
+    <!-- ÉCRAN DE VERROUILLAGE SÉCURISÉ -->
     <div id="verrou">
         <div class="verrou-box">
             <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.4em;">🔒 ACCÈS SÉCURISÉ VIP</h2>
@@ -62,28 +62,43 @@
         <h1>🏆 Pronos & Coupons VIP</h1>
         <p>Bienvenue sur mon site de parieur <span class="signature">créé par housseini</span> !</p>
 
+        <!-- COUPON DU JOUR -->
         <div class="card">
-            <h2>🔥 Combiné du Jour</h2>
+            <h2>🔥 Combiné VIP du Week-end</h2>
             <p>Statut : <span class="statut">En attente</span></p>
+            
             <table>
                 <tr><th>Match</th><th>Prono</th><th>Côte</th></tr>
-                <tr><td>Real Madrid - Barça</td><td>Victoire Real</td><td>1.85</td></tr>
-                <tr><td>Man. City - Chelsea</td><td>Plus de 2.5 buts</td><td>1.35</td></tr>
+                <tr><td>France - Italie</td><td>Plus de 2.5 buts</td><td>1.75</td></tr>
+                <tr><td>Espagne - Allemagne</td><td>Les 2 marquent</td><td>1.60</td></tr>
             </table>
-            <p style="font-size: 1.3em; color: #00e676; font-weight: bold;">Côte totale : 2.50</p>
+
+            <p style="font-size: 1.3em; color: #00e676; font-weight: bold;">Côte totale : 2.80</p>
         </div>
 
+        <!-- SECTION GESTION DE MISE -->
         <div class="card-bankroll">
             <span class="bk-title">💰 GESTION DE MISE PROFESSIONNELLE</span>
             <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9em; line-height: 1.5;">
-                <li>Ne misez jamais tout votre argent sur un seul coupon.</li>
-                <li>Misez au maximum 10% à 15% de votre capital total par combiné.</li>
+                <li>Ne misez jamais tout votre argent sur un seul coupon (Pas d'All-In).</li>
+                <li>Misez au maximum <b>10% à 15%</b> de votre capital total par combiné.</li>
+                <li>Restez discipliné, les paris sportifs sont un marathon, pas un sprint !</li>
             </ul>
+        </div>
+
+        <!-- HISTORIQUE -->
+        <div class="card-history">
+            <h2 style="color: #888; font-size: 1.2em;">📊 Derniers Résultats</h2>
+            <table>
+                <tr><th>Date</th><th>Type</th><th>Côte</th><th>Résultat</th></tr>
+                <tr><td>04/06</td><td>Combiné Safe</td><td>2.10</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
+                <tr><td>03/06</td><td>Single Match</td><td>1.90</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
+            </table>
         </div>
     </div>
 
     <script>
-        // Le site reste ouvert sur le téléphone du vrai client s'il actualise la page
+        // Le site reste ouvert sur le téléphone du client s'il actualise
         window.onload = function() {
             if (localStorage.getItem("vip_debloque") === "true") {
                 document.getElementById("verrou").style.display = "none";
@@ -92,7 +107,7 @@
         };
 
         function verifierCle() {
-            // C'EST CETTE LISTE QUE TU VAS MODIFIER DEPUIS TERMUX POUR EFFACER LES CODES
+            // LISTE DE TES 10 CODES VIP ACTIFS
             var clesVIP = [
                 "PRONO01", "PRONO02", "PRONO03", "PRONO04", "PRONO05",
                 "PRONO06", "PRONO07", "PRONO08", "PRONO09", "PRONO10"
@@ -102,9 +117,7 @@
             var erreurTxt = document.getElementById("erreur");
             
             if (clesVIP.includes(saisie)) {
-                // Le client valide son accès définitif localement sur son appareil
                 localStorage.setItem("vip_debloque", "true");
-                
                 document.getElementById("verrou").style.display = "none";
                 document.getElementById("contenu-site").style.display = "block";
             } else {
