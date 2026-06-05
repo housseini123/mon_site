@@ -58,7 +58,6 @@
 
     <!-- LE CONTENU DU SITE -->
     <div id="contenu-site">
-        <!-- LOGO TEXTE ULTRA-STABLE SANS BUG -->
         <div class="logo-txt">💰</div>
         
         <h1>🏆 Pronos & Coupons VIP</h1>
@@ -101,15 +100,41 @@
     </div>
 
     <script>
+        // Système automatique de sécurité à usage unique
+        window.onload = function() {
+            if (localStorage.getItem("vip_debloque") === "true") {
+                document.getElementById("verrou").style.display = "none";
+                document.getElementById("contenu-site").style.display = "block";
+            }
+        };
+
         function verifierCle() {
-            var cleCorrecte = "PRONO88"; 
-            var saisie = document.getElementById("codeVIP").value.trim();
+            var clesVIP = [
+                "PRONO01", "PRONO02", "PRONO03", "PRONO04", "PRONO05",
+                "PRONO06", "PRONO07", "PRONO08", "PRONO09", "PRONO10"
+            ];
             
-            if (saisie === cleCorrecte) {
+            var saisie = document.getElementById("codeVIP").value.trim();
+            var erreurTxt = document.getElementById("erreur");
+            
+            // 1. On vérifie si ce code a déjà été marqué comme expiré sur cet appareil
+            if (localStorage.getItem("expire_" + saisie) === "true") {
+                erreurTxt.innerText = "❌ Ce code a déjà été utilisé et a expiré !";
+                erreurTxt.style.display = "block";
+                return;
+            }
+
+            // 2. On vérifie si le code fait partie de la liste officielle
+            if (clesVIP.includes(saisie)) {
+                // On grille immédiatement le code pour qu'il devienne inutilisable la prochaine fois
+                localStorage.setItem("expire_" + saisie, "true");
+                localStorage.setItem("vip_debloque", "true");
+                
                 document.getElementById("verrou").style.display = "none";
                 document.getElementById("contenu-site").style.display = "block";
             } else {
-                document.getElementById("erreur").style.display = "block";
+                erreurTxt.innerText = "❌ Code d'accès invalide !";
+                erreurTxt.style.display = "block";
             }
         }
     </script>
