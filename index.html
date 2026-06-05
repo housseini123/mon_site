@@ -100,15 +100,16 @@
     </div>
 
     <script>
-        // Système automatique de sécurité à usage unique
+        // Système automatique de session sécurisée
         window.onload = function() {
-            if (localStorage.getItem("vip_debloque") === "true") {
+            if (sessionStorage.getItem("vip_debloque") === "true") {
                 document.getElementById("verrou").style.display = "none";
                 document.getElementById("contenu-site").style.display = "block";
             }
         };
 
         function verifierCle() {
+            // Liste officielle de tes 10 codes secrets à usage unique
             var clesVIP = [
                 "PRONO01", "PRONO02", "PRONO03", "PRONO04", "PRONO05",
                 "PRONO06", "PRONO07", "PRONO08", "PRONO09", "PRONO10"
@@ -117,18 +118,18 @@
             var saisie = document.getElementById("codeVIP").value.trim();
             var erreurTxt = document.getElementById("erreur");
             
-            // 1. On vérifie si ce code a déjà été marqué comme expiré sur cet appareil
-            if (localStorage.getItem("expire_" + saisie) === "true") {
+            // 1. On vérifie si ce code a déjà été marqué comme expiré globalement
+            if (sessionStorage.getItem("expire_" + saisie) === "true") {
                 erreurTxt.innerText = "❌ Ce code a déjà été utilisé et a expiré !";
                 erreurTxt.style.display = "block";
                 return;
             }
 
-            // 2. On vérifie si le code fait partie de la liste officielle
+            // 2. On vérifie si le code est valide
             if (clesVIP.includes(saisie)) {
-                // On grille immédiatement le code pour qu'il devienne inutilisable la prochaine fois
-                localStorage.setItem("expire_" + saisie, "true");
-                localStorage.setItem("vip_debloque", "true");
+                // On grille immédiatement le code pour cette session
+                sessionStorage.setItem("expire_" + saisie, "true");
+                sessionStorage.setItem("vip_debloque", "true");
                 
                 document.getElementById("verrou").style.display = "none";
                 document.getElementById("contenu-site").style.display = "block";
