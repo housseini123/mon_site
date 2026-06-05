@@ -32,11 +32,11 @@
 </head>
 <body>
 
-    <!-- ÉCRAN DE VERROUILLAGE SÉCURISÉ -->
+    <!-- ÉCRAN DE VERROUILLAGE VIP -->
     <div id="verrou">
         <div class="verrou-box">
             <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.4em;">🔒 ACCÈS SÉCURISÉ VIP</h2>
-            <p style="font-size: 0.9em; color: #bbb;">Pour débloquer les coupons du jour de Housseini, suis scrupuleusement ces deux étapes obligatoires :</p>
+            <p style="font-size: 0.9em; color: #bbb;">Pour débloquer les coupons du jour de Housseini, suis ces deux étapes obligatoires :</p>
             
             <div class="step">
                 <b>Étape 1 :</b> Crée ton compte chez le bookmaker en utilisant obligatoirement le code promo <span class="signature">DMMD7</span> et effectue un dépôt.
@@ -50,96 +50,86 @@
 
             <hr style="border: 0.5px solid #333; margin: 20px 0;">
 
-            <input type="text" id="codeVIP" class="input-code" placeholder="ENTRE TON CODE ACCÈS SECRET">
+            <input type="text" id="codeVIP" class="input-code" placeholder="ENTRE TON CODE CLÉ PERSONNEL">
             <button onclick="verifierCle()" class="btn-valider">🔓 Ouvrir les Pronostics</button>
-            <p id="erreur" style="color: #ff3333; margin-top: 10px; font-weight: bold; display: none;">❌ Code d'accès invalide !</p>
+            <p id="erreur" style="color: #ff3333; margin-top: 10px; font-weight: bold; display: none;">❌ Code invalide ou déjà expiré ailleurs !</p>
         </div>
     </div>
 
     <!-- LE CONTENU DU SITE -->
     <div id="contenu-site">
         <div class="logo-txt">💰</div>
-        
         <h1>🏆 Pronos & Coupons VIP</h1>
         <p>Bienvenue sur mon site de parieur <span class="signature">créé par housseini</span> !</p>
 
-        <!-- COUPON DU JOUR -->
         <div class="card">
             <h2>🔥 Combiné du Jour</h2>
             <p>Statut : <span class="statut">En attente</span></p>
-            
             <table>
                 <tr><th>Match</th><th>Prono</th><th>Côte</th></tr>
                 <tr><td>Real Madrid - Barça</td><td>Victoire Real</td><td>1.85</td></tr>
                 <tr><td>Man. City - Chelsea</td><td>Plus de 2.5 buts</td><td>1.35</td></tr>
             </table>
-
             <p style="font-size: 1.3em; color: #00e676; font-weight: bold;">Côte totale : 2.50</p>
         </div>
 
-        <!-- SECTION GESTION DE MISE -->
         <div class="card-bankroll">
             <span class="bk-title">💰 GESTION DE MISE PROFESSIONNELLE</span>
-            <p style="margin: 5px 0; font-size: 0.95em; line-height: 1.4;">Pour être rentable à long terme avec mes pronostics, suis cette règle d'or :</p>
             <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9em; line-height: 1.5;">
-                <li>Ne misez jamais tout votre argent sur un seul coupon (Pas d'All-In).</li>
+                <li>Ne misez jamais tout votre argent sur un seul coupon.</li>
                 <li>Misez au maximum <b>10% à 15%</b> de votre capital total par combiné.</li>
-                <li>Restez discipliné, les paris sportifs sont un marathon, pas un sprint !</li>
             </ul>
-        </div>
-
-        <!-- HISTORIQUE -->
-        <div class="card-history">
-            <h2 style="color: #888; font-size: 1.2em;">📊 Derniers Résultats</h2>
-            <table>
-                <tr><th>Date</th><th>Type</th><th>Côte</th><th>Résultat</th></tr>
-                <tr><td>03/06</td><td>Combiné Safe</td><td>2.10</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
-                <tr><td>02/06</td><td>Single Match</td><td>1.90</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
-            </table>
         </div>
     </div>
 
     <script>
-        // Système automatique de session sécurisée
+        // Génération d'un identifiant unique secret pour chaque téléphone
+        if (!localStorage.getItem("mon_id_telephone")) {
+            localStorage.setItem("mon_id_telephone", "phone_" + Math.random().toString(36).substr(2, 9));
+        }
+        var monId = localStorage.getItem("mon_id_telephone");
+
+        // Liste des 10 codes VIP autorisés
+        var clesValides = ["PRONO01", "PRONO02", "PRONO03", "PRONO04", "PRONO05", "PRONO06", "PRONO07", "PRONO08", "PRONO09", "PRONO10"];
+
         window.onload = function() {
-            if (sessionStorage.getItem("vip_debloque") === "true") {
+            // Si le téléphone a déjà débloqué le VIP proprement
+            if (localStorage.getItem("vip_autorise") === "true") {
                 document.getElementById("verrou").style.display = "none";
                 document.getElementById("contenu-site").style.display = "block";
             }
         };
 
         function verifierCle() {
-            // Liste officielle de tes 10 codes secrets à usage unique
-            var clesVIP = [
-                "PRONO01", "PRONO02", "PRONO03", "PRONO04", "PRONO05",
-                "PRONO06", "PRONO07", "PRONO08", "PRONO09", "PRONO10"
-            ];
-            
-            var saisie = document.getElementById("codeVIP").value.trim();
+            var saisie = document.getElementById("codeVIP").value.trim().toUpperCase();
             var erreurTxt = document.getElementById("erreur");
-            
-            // 1. On vérifie si ce code a déjà été marqué comme expiré globalement
-            if (sessionStorage.getItem("expire_" + saisie) === "true") {
-                erreurTxt.innerText = "❌ Ce code a déjà été utilisé et a expiré !";
-                erreurTxt.style.display = "block";
-                return;
-            }
 
-            // 2. On vérifie si le code est valide
-            if (clesVIP.includes(saisie)) {
-                // On grille immédiatement le code pour cette session
-                sessionStorage.setItem("expire_" + saisie, "true");
-                sessionStorage.setItem("vip_debloque", "true");
-                
-                document.getElementById("verrou").style.display = "none";
-                document.getElementById("contenu-site").style.display = "block";
+            if (clesValides.includes(saisie)) {
+                // On regarde qui a enregistré ce code sur Internet (simulé par le stockage lié à la clé)
+                var premierTelephone = localStorage.getItem("proprietaire_" + saisie);
+
+                if (!premierTelephone) {
+                    // Si personne ne l'a encore utilisé, ce téléphone devient le propriétaire unique à vie
+                    localStorage.setItem("proprietaire_" + saisie, monId);
+                    localStorage.setItem("vip_autorise", "true");
+                    document.getElementById("verrou").style.display = "none";
+                    document.getElementById("contenu-site").style.display = "block";
+                } else if (premierTelephone === monId) {
+                    // Si c'est le bon propriétaire qui revient, on le laisse passer
+                    localStorage.setItem("vip_autorise", "true");
+                    document.getElementById("verrou").style.display = "none";
+                    document.getElementById("contenu-site").style.display = "block";
+                } else {
+                    // Si l'identifiant du téléphone est différent, c'est un fraudeur ! On bloque !
+                    erreurTxt.innerText = "❌ Ce code est déjà utilisé sur un autre téléphone !";
+                    erreurTxt.style.display = "block";
+                }
             } else {
-                erreurTxt.innerText = "❌ Code d'accès invalide !";
+                erreurTxt.innerText = "❌ Code d'accès VIP invalide !";
                 erreurTxt.style.display = "block";
             }
         }
     </script>
-
 </body>
 </html>
 
