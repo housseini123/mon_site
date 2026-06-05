@@ -62,18 +62,19 @@
         <h1>🏆 Pronos & Coupons VIP</h1>
         <p>Bienvenue sur mon site de parieur <span class="signature">créé par housseini</span> !</p>
 
-        <!-- COUPON DU JOUR -->
+        <!-- COUPON DU JOUR MIS À JOUR POUR CE WEEK-END -->
         <div class="card">
             <h2>🔥 Combiné VIP du Week-end</h2>
             <p>Statut : <span class="statut">En attente</span></p>
             
             <table>
                 <tr><th>Match</th><th>Prono</th><th>Côte</th></tr>
-                <tr><td>France - Italie</td><td>Plus de 2.5 buts</td><td>1.75</td></tr>
-                <tr><td>Espagne - Allemagne</td><td>Les 2 marquent</td><td>1.60</td></tr>
+                <tr><td>Portugal - Chili</td><td>Victoire Portugal</td><td>1.25</td></tr>
+                <tr><td>Belgique - Tunisie</td><td>Victoire Belgique</td><td>1.30</td></tr>
+                <tr><td>Maroc - Norvège</td><td>Plus de 1.5 buts</td><td>1.28</td></tr>
             </table>
 
-            <p style="font-size: 1.3em; color: #00e676; font-weight: bold;">Côte totale : 2.80</p>
+            <p style="font-size: 1.3em; color: #00e676; font-weight: bold;">Côte totale : 2.08</p>
         </div>
 
         <!-- SECTION GESTION DE MISE -->
@@ -98,7 +99,6 @@
     </div>
 
     <script>
-        // Le site reste ouvert sur le téléphone du client s'il actualise
         window.onload = function() {
             if (localStorage.getItem("vip_debloque") === "true") {
                 document.getElementById("verrou").style.display = "none";
@@ -107,7 +107,7 @@
         };
 
         function verifierCle() {
-            // LISTE DE TES 10 CODES VIP ACTIFS
+            // LES 10 CODES VIP DISPONIBLES
             var clesVIP = [
                 "PRONO01", "PRONO02", "PRONO03", "PRONO04", "PRONO05",
                 "PRONO06", "PRONO07", "PRONO08", "PRONO09", "PRONO10"
