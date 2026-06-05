@@ -23,6 +23,8 @@
         
         #verrou { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #121212; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; overflow-y: auto; padding: 10px 0; }
         .verrou-box { background-color: #1e1e1e; padding: 25px; border-radius: 15px; border: 2px solid #ffcc00; max-width: 365px; width: 88%; box-sizing: border-box; }
+        .input-code { width: 100%; padding: 12px; margin: 15px 0; border-radius: 8px; border: 1px solid #333; background-color: #252525; color: white; font-size: 1.1em; text-align: center; box-sizing: border-box; }
+        .btn-valider { background-color: #ffcc00; color: black; border: none; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 1.1em; width: 100%; }
         #contenu-site { display: none; }
         .step { text-align: left; font-size: 0.95em; margin: 15px 0; line-height: 1.4; }
         .bk-title { color: #ffcc00; font-weight: bold; margin-bottom: 10px; display: block; }
@@ -30,18 +32,27 @@
 </head>
 <body>
 
-    <!-- ÉCRAN DE VERROUILLAGE AUTOMATIQUE -->
+    <!-- ÉCRAN DE VERROUILLAGE AVEC TEXTE ACCÈS -->
     <div id="verrou">
         <div class="verrou-box">
-            <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.4em;">🔒 ACCÈS COMPTE VERROUILLÉ</h2>
-            <p style="font-size: 0.95em; color: #bbb; line-height: 1.4;">Ton lien d'accès secret est manquant, expiré ou invalide.</p>
+            <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.4em;">🔒 ACCÈS SÉCURISÉ VIP</h2>
+            <p style="font-size: 0.9em; color: #bbb;">Pour débloquer les coupons du jour de Housseini, suis scrupuleusement ces deux étapes obligatoires :</p>
             
-            <hr style="border: 0.5px solid #333; margin: 15px 0;">
+            <div class="step">
+                <b>Étape 1 :</b> Crée ton compte chez le bookmaker en utilisant obligatoirement le code promo <span class="signature">DMMD7</span> et effectue un dépôt.
+                <a href="https://1xbet.com" class="btn-link btn-bookmaker" target="_blank">📲 S'inscrire sur le Bookmaker</a>
+            </div>
 
             <div class="step">
-                <b>Pour obtenir ton lien VIP valide :</b> Crée ton compte chez le bookmaker avec le code promo <span class="signature">DMMD7</span>, fais ton dépôt et envoie la preuve sur WhatsApp.
-                <a href="whatsapp://send?phone=22797848267&text=Salut%20Housseini,%20je%20veux%20mon%20lien%20d'accès%20secret%20VIP" class="btn-link btn-whatsapp" style="margin-top: 15px;">💬 Demander mon lien sur WhatsApp</a>
+                <b>Étape 2 :</b> Envoie la capture d'écran de ton nouveau compte validé pour recevoir immédiatement ton code d'accès personnel.
+                <a href="whatsapp://send?phone=22797848267&text=Salut%20Housseini,%20voici%20la%20capture%20de%20mon%20compte%20avec%20ton%20code%20promo%20DMMD7%20pour%20avoir%20le%20mot%20de%20passe" class="btn-link btn-whatsapp">💬 Envoyer ma capture sur WhatsApp</a>
             </div>
+
+            <hr style="border: 0.5px solid #333; margin: 20px 0;">
+
+            <input type="text" id="codeVIP" class="input-code" placeholder="ENTRE TON CODE ACCÈS SECRET">
+            <button onclick="verifierCle()" class="btn-valider">🔓 Ouvrir les Pronostics</button>
+            <p id="erreur" style="color: #ff3333; margin-top: 10px; font-weight: bold; display: none;">❌ Code d'accès invalide ou expiré !</p>
         </div>
     </div>
 
@@ -72,21 +83,33 @@
     </div>
 
     <script>
-        // Lecture automatique du jeton dans l'adresse internet du lien
-        var parametres = new URLSearchParams(window.location.search);
-        var jetonUtilisateur = parametres.get('token');
+        // Le site reste ouvert sur le téléphone du vrai client s'il actualise la page
+        window.onload = function() {
+            if (localStorage.getItem("vip_debloque") === "true") {
+                document.getElementById("verrou").style.display = "none";
+                document.getElementById("contenu-site").style.display = "block";
+            }
+        };
 
-        // Liste officielle des 10 jetons d'activation
-        var jetonsValides = ["VIP01", "VIP02", "VIP03", "VIP04", "VIP05", "VIP06", "VIP07", "VIP08", "VIP09", "VIP10"];
-
-        if (jetonsValides.includes(jetonUtilisateur)) {
-            // Le jeton est bon : on masque le verrou et on ouvre le site
-            document.getElementById("verrou").style.display = "none";
-            document.getElementById("contenu-site").style.display = "block";
-        } else {
-            // Pas de jeton ou jeton trafiqué : le site reste bloqué à double tour
-            document.getElementById("verrou").style.display = "flex";
-            document.getElementById("contenu-site").style.display = "none";
+        function verifierCle() {
+            // C'EST CETTE LISTE QUE TU VAS MODIFIER DEPUIS TERMUX POUR EFFACER LES CODES
+            var clesVIP = [
+                "PRONO01", "PRONO02", "PRONO03", "PRONO04", "PRONO05",
+                "PRONO06", "PRONO07", "PRONO08", "PRONO09", "PRONO10"
+            ];
+            
+            var saisie = document.getElementById("codeVIP").value.trim().toUpperCase();
+            var erreurTxt = document.getElementById("erreur");
+            
+            if (clesVIP.includes(saisie)) {
+                // Le client valide son accès définitif localement sur son appareil
+                localStorage.setItem("vip_debloque", "true");
+                
+                document.getElementById("verrou").style.display = "none";
+                document.getElementById("contenu-site").style.display = "block";
+            } else {
+                erreurTxt.style.display = "block";
+            }
         }
     </script>
 </body>
