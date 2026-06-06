@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    <!-- ÉCRAN DE VERROUILLAGE SÉCURISÉ -->
+    <!-- ÉCRAN DE VERROUILLAGE VIP -->
     <div id="verrou">
         <div class="verrou-box">
             <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.4em;">🔒 ACCÈS SÉCURISÉ VIP</h2>
@@ -52,7 +52,7 @@
 
             <input type="text" id="codeVIP" class="input-code" placeholder="ENTRE TON CODE ACCÈS SECRET">
             <button onclick="verifierCle()" class="btn-valider">🔓 Ouvrir les Pronostics</button>
-            <p id="erreur" style="color: #ff3333; margin-top: 10px; font-weight: bold; display: none;">❌ Code d'accès invalide ou expiré !</p>
+            <p id="erreur" style="color: #ff3333; margin-top: 10px; font-weight: bold; display: none;">❌ Code d'accès incorrect ! Réessaye.</p>
         </div>
     </div>
 
@@ -62,7 +62,7 @@
         <h1>🏆 Pronos & Coupons VIP</h1>
         <p>Bienvenue sur mon site de parieur <span class="signature">créé par housseini</span> !</p>
 
-        <!-- COUPON DU JOUR MIS À JOUR POUR CE WEEK-END -->
+        <!-- COUPON DU JOUR -->
         <div class="card">
             <h2>🔥 Combiné VIP du Week-end</h2>
             <p>Statut : <span class="statut">En attente</span></p>
@@ -99,25 +99,26 @@
     </div>
 
     <script>
+        // Le site s'ouvre directement si le mot de passe actuel a déjà été validé
         window.onload = function() {
-            if (localStorage.getItem("vip_debloque") === "true") {
+            if (localStorage.getItem("vip_debloque_housseini227") === "true") {
                 document.getElementById("verrou").style.display = "none";
                 document.getElementById("contenu-site").style.display = "block";
             }
         };
 
         function verifierCle() {
-            // LES 10 CODES VIP DISPONIBLES
-            var clesVIP = [
-                "PRONO01", "PRONO02", "PRONO03", "PRONO04", "PRONO05",
-                "PRONO06", "PRONO07", "PRONO08", "PRONO09", "PRONO10"
-            ];
+            // CODE DE SÉCURITÉ UNIQUE ET OFFICIEL
+            var cleCorrecte = "HOUSSEINI227";
             
             var saisie = document.getElementById("codeVIP").value.trim().toUpperCase();
             var erreurTxt = document.getElementById("erreur");
             
-            if (clesVIP.includes(saisie)) {
-                localStorage.setItem("vip_debloque", "true");
+            if (saisie === cleCorrecte) {
+                // On nettoie les anciennes mémoires obsolètes pour éviter les bugs
+                localStorage.clear();
+                // On valide le nouvel accès
+                localStorage.setItem("vip_debloque_housseini227", "true");
                 document.getElementById("verrou").style.display = "none";
                 document.getElementById("contenu-site").style.display = "block";
             } else {
