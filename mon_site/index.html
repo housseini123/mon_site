@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Coupons de Paris - Housseini</title>
+    <style>
+        body { background-color: #121212; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px; }
+        .card { background-color: #1e1e1e; border: 2px solid #00e676; border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 450px; }
+        .card-history { background-color: #1e1e1e; border: 2px solid #333; border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 450px; }
+        .card-bankroll { background-color: #1e1e1e; border: 2px solid #ffcc00; border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 450px; text-align: left; }
+        h1 { color: #00e676; margin-top: 10px; margin-bottom: 5px; }
+        .statut { background-color: #ff9800; color: black; padding: 5px 10px; font-weight: bold; border-radius: 5px; font-size: 0.9em; }
+        .statut-win { background-color: #00e676; color: black; padding: 5px 10px; font-weight: bold; border-radius: 5px; font-size: 0.9em; }
+        .signature { color: #00e676; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #252525; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+        th { background-color: #00e676; color: black; font-weight: bold; }
+        .btn-link { display: block; text-decoration: none; padding: 14px; font-weight: bold; border-radius: 8px; margin: 12px 0; font-size: 1em; text-align: center; }
+        .btn-bookmaker { background-color: #2979ff; color: white; border: 1px solid #1565c0; }
+        .btn-whatsapp { background-color: #00e676; color: black; }
+        .logo-txt { width: 100px; height: 100px; background-color: #1e1e1e; border: 3px solid #00e676; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 20px auto 10px auto; box-sizing: border-box; line-height: 100px; }
+        
+        #verrou { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #121212; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; overflow-y: auto; padding: 10px 0; }
+        .verrou-box { background-color: #1e1e1e; padding: 25px; border-radius: 15px; border: 2px solid #ffcc00; max-width: 365px; width: 88%; box-sizing: border-box; }
+        .input-code { width: 100%; padding: 12px; margin: 15px 0; border-radius: 8px; border: 1px solid #333; background-color: #252525; color: white; font-size: 1.1em; text-align: center; box-sizing: border-box; }
+        .btn-valider { background-color: #ffcc00; color: black; border: none; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 1.1em; width: 100%; }
+        #contenu-site { display: none; }
+        .step { text-align: left; font-size: 0.95em; margin: 15px 0; line-height: 1.4; }
+        .bk-title { color: #ffcc00; font-weight: bold; margin-bottom: 10px; display: block; }
+    </style>
+</head>
+<body>
+
+    <!-- ÉCRAN DE VERROUILLAGE SÉCURISÉ -->
+    <div id="verrou">
+        <div class="verrou-box">
+            <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.4em;">🔒 ACCÈS SÉCURISÉ VIP</h2>
+            <p style="font-size: 0.9em; color: #bbb;">Pour débloquer les coupons du jour de Housseini, suis scrupuleusement ces deux étapes obligatoires :</p>
+            
+            <div class="step">
+                <b>Étape 1 :</b> Crée ton compte chez le bookmaker en utilisant obligatoirement le code promo <span class="signature">DMMD7</span> et effectue un dépôt.
+                <a href="https://1xbet.com" class="btn-link btn-bookmaker" target="_blank">📲 S'inscrire sur le Bookmaker</a>
+            </div>
+
+            <div class="step">
+                <b>Étape 2 :</b> Envoie la capture d'écran de ton nouveau compte validé pour recevoir immédiatement ton code d'accès personnel.
+                <a href="whatsapp://send?phone=22797848267&text=Salut%20Housseini,%20voici%20la%20capture%20de%20mon%20compte%20avec%20ton%20code%20promo%20DMMD7%20pour%20avoir%20le%20mot%20de%20passe" class="btn-link btn-whatsapp">💬 Envoyer ma capture sur WhatsApp</a>
+            </div>
+
+            <hr style="border: 0.5px solid #333; margin: 20px 0;">
+
+            <input type="text" id="codeVIP" class="input-code" placeholder="ENTRE TON CODE ACCÈS SECRET">
+            <button onclick="verifierCle()" class="btn-valider">🔓 Ouvrir les Pronostics</button>
+            <p id="erreur" style="color: #ff3333; margin-top: 10px; font-weight: bold; display: none;">❌ Code d'accès incorrect ! Réessaye.</p>
+        </div>
+    </div>
+
+    <!-- LE CONTENU DU SITE -->
+    <div id="contenu-site">
+        <div class="logo-txt">💰</div>
+        <h1>🏆 Pronos & Coupons VIP</h1>
+        <p>Bienvenue sur mon site de parieur <span class="signature">créé par housseini</span> !</p>
+
+        <!-- COUPON DU SAMEDI MIS À JOUR -->
+        <div class="card">
+            <h2>🔥 Combiné VIP du Samedi</h2>
+            <p>Statut : <span class="statut">En attente</span></p>
+            
+            <table>
+                <tr><th>Match</th><th>Prono</th><th>Côte</th></tr>
+                <tr><td>Italie - Écosse</td><td>Victoire Italie</td><td>1.40</td></tr>
+                <tr><td>Allemagne - Tunisie</td><td>Plus de 2.5 buts</td><td>1.45</td></tr>
+                <tr><td>Maroc - Zambie</td><td>Victoire Maroc</td><td>1.35</td></tr>
+            </table>
+
+            <p style="font-size: 1.3em; color: #00e676; font-weight: bold;">Côte totale : 2.74</p>
+        </div>
+
+        <!-- SECTION GESTION DE MISE -->
+        <div class="card-bankroll">
+            <span class="bk-title">💰 GESTION DE MISE PROFESSIONNELLE</span>
+            <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9em; line-height: 1.5;">
+                <li>Ne misez jamais tout votre argent sur un seul coupon (Pas d'All-In).</li>
+                <li>Misez au maximum <b>10% à 15%</b> de votre capital total par combiné.</li>
+                <li>Restez discipliné, les paris sportifs sont un marathon, pas un sprint !</li>
+            </ul>
+        </div>
+
+        <!-- HISTORIQUE -->
+        <div class="card-history">
+            <h2 style="color: #888; font-size: 1.2em;">📊 Derniers Résultats</h2>
+            <table>
+                <tr><th>Date</th><th>Type</th><th>Côte</th><th>Résultat</th></tr>
+                <tr><td>05/06</td><td>Combiné Safe</td><td>2.10</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
+                <tr><td>04/06</td><td>Single Match</td><td>1.90</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            if (localStorage.getItem("vip_debloque_housseini227") === "true") {
+                document.getElementById("verrou").style.display = "none";
+                document.getElementById("contenu-site").style.display = "block";
+            }
+        };
+
+        function verifierCle() {
+            var cleCorrecte = "HOUSSEINI227";
+            
+            var saisie = document.getElementById("codeVIP").value.trim().toUpperCase();
+            var erreurTxt = document.getElementById("erreur");
+            
+            if (saisie === cleCorrecte) {
+                localStorage.clear();
+                localStorage.setItem("vip_debloque_housseini227", "true");
+                document.getElementById("verrou").style.display = "none";
+                document.getElementById("contenu-site").style.display = "block";
+            } else {
+                erreurTxt.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
+
