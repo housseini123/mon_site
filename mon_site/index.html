@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    <!-- ÉCRAN DE VERROUILLAGE SÉCURISÉ -->
+    <!-- ÉCRAN DE VERROUILLAGE VIP -->
     <div id="verrou">
         <div class="verrou-box">
             <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.4em;">🔒 ACCÈS SÉCURISÉ VIP</h2>
@@ -62,19 +62,19 @@
         <h1>🏆 Pronos & Coupons VIP</h1>
         <p>Bienvenue sur mon site de parieur <span class="signature">créé par housseini</span> !</p>
 
-        <!-- COUPON DU SAMEDI MIS À JOUR -->
+        <!-- COUPON DU JOUR -->
         <div class="card">
-            <h2>🔥 Combiné VIP du Samedi</h2>
+            <h2>🔥 Combiné VIP du Week-end</h2>
             <p>Statut : <span class="statut">En attente</span></p>
             
             <table>
                 <tr><th>Match</th><th>Prono</th><th>Côte</th></tr>
-                <tr><td>Italie - Écosse</td><td>Victoire Italie</td><td>1.40</td></tr>
-                <tr><td>Allemagne - Tunisie</td><td>Plus de 2.5 buts</td><td>1.45</td></tr>
-                <tr><td>Maroc - Zambie</td><td>Victoire Maroc</td><td>1.35</td></tr>
+                <tr><td>Portugal - Chili</td><td>Victoire Portugal</td><td>1.25</td></tr>
+                <tr><td>Belgique - Tunisie</td><td>Victoire Belgique</td><td>1.30</td></tr>
+                <tr><td>Maroc - Norvège</td><td>Plus de 1.5 buts</td><td>1.28</td></tr>
             </table>
 
-            <p style="font-size: 1.3em; color: #00e676; font-weight: bold;">Côte totale : 2.74</p>
+            <p style="font-size: 1.3em; color: #00e676; font-weight: bold;">Côte totale : 2.08</p>
         </div>
 
         <!-- SECTION GESTION DE MISE -->
@@ -92,13 +92,14 @@
             <h2 style="color: #888; font-size: 1.2em;">📊 Derniers Résultats</h2>
             <table>
                 <tr><th>Date</th><th>Type</th><th>Côte</th><th>Résultat</th></tr>
-                <tr><td>05/06</td><td>Combiné Safe</td><td>2.10</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
-                <tr><td>04/06</td><td>Single Match</td><td>1.90</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
+                <tr><td>04/06</td><td>Combiné Safe</td><td>2.10</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
+                <tr><td>03/06</td><td>Single Match</td><td>1.90</td><td><span class="statut-win">GAGNÉ ✅</span></td></tr>
             </table>
         </div>
     </div>
 
     <script>
+        // Le site s'ouvre directement si le mot de passe actuel a déjà été validé
         window.onload = function() {
             if (localStorage.getItem("vip_debloque_housseini227") === "true") {
                 document.getElementById("verrou").style.display = "none";
@@ -107,13 +108,16 @@
         };
 
         function verifierCle() {
+            // CODE DE SÉCURITÉ UNIQUE ET OFFICIEL
             var cleCorrecte = "HOUSSEINI227";
             
             var saisie = document.getElementById("codeVIP").value.trim().toUpperCase();
             var erreurTxt = document.getElementById("erreur");
             
             if (saisie === cleCorrecte) {
+                // On nettoie les anciennes mémoires obsolètes pour éviter les bugs
                 localStorage.clear();
+                // On valide le nouvel accès
                 localStorage.setItem("vip_debloque_housseini227", "true");
                 document.getElementById("verrou").style.display = "none";
                 document.getElementById("contenu-site").style.display = "block";
