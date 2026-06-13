@@ -1,0 +1,21 @@
+{
+  "short_name": "DMMD7 VIP",
+  "name": "DMMD7 VIP - Pronostics Sécurisés",
+  "icons": [
+    {
+      "src": "https://imgbox.com",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://imgbox.com",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#0b0f19",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#00ffcc"
+}
